@@ -18,13 +18,21 @@
     <p>
         {{my-button buttonText="A" afterValue="B"}}
     </p>
-    {{#link-to 'page2'}}Go to page 2{{/link-to}}
+    {{#link-to 'page2' id="page2-link"}}Go to page 2{{/link-to}}
   </script>
 
   <script type="text/x-handlebars" id="page2">
-    <p>This is page 2.</p>
+    <p id="page-title">{{page2_title}}</p>
+    <input type="button" {{action changeTitle}} />
     <p>
         {{name-input}}
+    </p>
+    <p>
+      <ul>
+        {{#each items}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
     </p>
   </script>
 

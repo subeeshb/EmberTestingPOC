@@ -11,17 +11,60 @@ module("Integration tests", {
   }
 });
 
+function ajax(url, options) {
+  return new Ember.RSVP.Promise(function(resolve, reject){
+    options = options || {};
+    options.url = url;
 
-test("check if button text changes using ember integration testing", function() {
+    options.success = function(data) {
+      Ember.run(null, resolve, data);
+    };
+
+    options.error = function(jqxhr, status, something) {
+      Ember.run(null, reject, arguments);
+    };
+
+    Ember.$.ajax(options);
+  });
+}
+
+App.Page2Controller.reopenClass({
+  getData: function() {
+    var url = "/data.json";
+    ajax(url).then(function(data) {
+      data.items.forEach(function(c) {
+        this.set('items', data.items);
+      }.bind(this));
+    }.bind(this));
+  }
+});
+
+
+// test("check if button text changes using ember integration testing", function() {
+//   var intialState = 'Before';
+//   visit("/").then(function() {    
+//     equal(find('.comp-button').val(), intialState, 'Button text is '+intialState);
+//   }).then(function() {
+//     for(var i=0; i<4; i++) {
+//       intialState = (intialState === "Before" ? "After" : "Before");
+//       console.log(intialState);
+//       click('.comp-button').then(function(){
+//         equal(find('.comp-button').val(), intialState, 'Button text is '+intialState);
+//       });
+//     }
+//   }); 
+// });
+
+test("check routing to page 2", function() {
   visit("/").then(function() {
-    equal(find('.comp-button').val(), 'Before', 'Button text is "Before"');
-  }).then(function() {
-    click('.comp-button');
-  }).then(function() {
-    equal(find('.comp-button').val(), 'After', 'Button text is "After"');
+    click('#page2-link');
+  }).then(function(){
+    equal(find('#page-title').text(), 'This is page2.', 'Page Title');
+    changeTitle();
   });
 });
 
+/*
 test("check if button text changes", function() {
     var myButtonComponent = App.MyButtonComponent.create({
         buttonText: 'X',
@@ -33,3 +76,4 @@ test("check if button text changes", function() {
     myButton.triggerAction({action: 'changeValue', target: myButton})
     equal(myButtonComponent.buttonText, 'Y', 'Button text is "Y"');
 });
+*/

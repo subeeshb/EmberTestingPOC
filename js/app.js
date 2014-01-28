@@ -48,9 +48,27 @@ App.Page2Route = Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('model', model);
+    controller.getData();
   }
 });
 
 App.Page2Controller = Ember.Controller.extend({
-  model: null
+  page2_title:"This is page2.",
+  items: [],
+  actions: {
+    changeTitle: function() {
+      this.set('page2_title', 'Changed');
+      console.log('changeTitle');
+    }
+  },
+  getData: function() {
+    var url = "/data.json";
+    Ember.$.getJSON(url).then(function(data) {
+      data.items.forEach(function(c) {
+        this.set('items', data.items);
+      }.bind(this));
+    }.bind(this));
+  }
+
+  
 });
