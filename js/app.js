@@ -10,7 +10,6 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
-
 App.MyButtonComponent = Ember.Component.extend({
 	actions: {
 		changeValue: function(e) {

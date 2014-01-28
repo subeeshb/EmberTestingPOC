@@ -1,5 +1,4 @@
-if (window.location.search === "?test/") {
-    console.log('test');
+if (window.location.search.indexOf("?test") !== -1) {
   document.write(
     '<div id="qunit"></div>' +
     '<div id="qunit-fixture"></div>' +
@@ -11,6 +10,4 @@ if (window.location.search === "?test/") {
     '<script src="tests/vendor/qunit-1.12.0.js"></script>' +
     '<script src="tests/tests.js"></script>'
   )
-} else {
-    console.log('tests not run');
 }
