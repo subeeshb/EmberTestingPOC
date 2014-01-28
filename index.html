@@ -2,14 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Ember Starter Kit</title>
+<title>Components</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
-
     {{outlet}}
   </script>
 
@@ -20,11 +18,27 @@
     <p>
         {{my-button buttonText="A" afterValue="B"}}
     </p>
+    {{#link-to 'page2'}}Go to page 2{{/link-to}}
+  </script>
+
+  <script type="text/x-handlebars" id="page2">
+    <p>This is page 2.</p>
+    <p>
+        {{name-input}}
+    </p>
   </script>
 
   <script type="text/x-handlebars" id="components/my-button">
     Clicking this button should change the text from {{unbound buttonText}} to {{afterValue}}.<br/>
     <input type="button" class="comp-button" {{bind-attr value=buttonText}} {{action changeValue}}/>
+  </script>
+
+  <script type="text/x-handlebars" id="components/name-input">
+    <p>{{greeting}}</p>
+    <p>
+      Name: {{view Ember.TextField valueBinding="nameValue" placeholder="Type your name"}}
+      <input type="button" value="OK" {{action showGreeting}} />
+    </p>
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
