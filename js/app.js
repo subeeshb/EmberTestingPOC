@@ -1,3 +1,21 @@
+//utility method for ajax calls
+function ajax(url, options) {
+  return new Ember.RSVP.Promise(function(resolve, reject){
+    options = options || {};
+    options.url = url;
+
+    options.success = function(data) {
+      Ember.run(null, resolve, data);
+    };
+
+    options.error = function(jqxhr, status, something) {
+      Ember.run(null, reject, arguments);
+    };
+
+    Ember.$.ajax(options);
+  });
+}
+
 App = Ember.Application.create();
 
 App.Router.map(function() {
@@ -30,16 +48,6 @@ App.NameInputComponent = Ember.Component.extend({
   }
 });
 
-App.TestObject = {
-    method1: function() {
-        this.method2();
-    },
-
-    method2: function() {
-
-    }
-};
-
 
 App.Page2Route = Ember.Route.extend({
   model: function() {
@@ -63,7 +71,8 @@ App.Page2Controller = Ember.Controller.extend({
   },
   getData: function() {
     var url = "/data.json";
-    Ember.$.getJSON(url).then(function(data) {
+    //console.log('non test mode');
+    ajax(url).then(function(data) {
       data.items.forEach(function(c) {
         this.set('items', data.items);
       }.bind(this));
