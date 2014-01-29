@@ -30,9 +30,14 @@ App.IndexRoute = Ember.Route.extend({
 });
 
 App.MyButtonComponent = Ember.Component.extend({
+  beforeText: null,
 	actions: {
 		changeValue: function(e) {
-			this.set('buttonText', this.get('afterValue'));
+      if(!this.get('beforeText')) {
+        this.set('beforeText', this.get('buttonText'));
+      }
+      var newValue = (this.get('buttonText') === this.get('beforeText')) ? this.get('afterValue') : this.get('beforeText');
+			this.set('buttonText', newValue);
 		}
 	}
 });

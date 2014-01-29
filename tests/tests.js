@@ -18,9 +18,8 @@ test("check if button text changes using ember integration testing", function() 
     equal(find('.comp-button').val(), intialState, 'Button text is '+intialState);
   }).then(function() {
     for(var i=0; i<4; i++) {
-      intialState = (intialState === "Before" ? "After" : "Before");
-      console.log(intialState);
       click('.comp-button').then(function(){
+        intialState = (intialState === "Before" ? "After" : "Before");
         equal(find('.comp-button').val(), intialState, 'Button text is '+intialState);
       });
     }
