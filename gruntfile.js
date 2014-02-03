@@ -47,32 +47,6 @@ module.exports = function(grunt) {
 
         concat:{
 
-            main:{
-                src:[
-                    // File's sequence MATTERS
-
-                    '<%= compiledTemplates %>/application/application.js',
-                    '<%= compiledTemplates %>/application/page1.js',
-
-                    '<%= compiledTemplates %>/application/alert.js',
-
-                    '<%= compiledTemplates %>/components/date-field.js',
-                    '<%= compiledTemplates %>/components/my-test.js',
-
-                    '<%= appScripts %>/common/documentReadyStart.js',
-                    '<%= appScripts %>/common/application.js',
-                    '<%= appScripts %>/common/router.js',
-
-
-
-                    '<%= appScripts %>/common/documentReadyEnd.js',
-
-
-                    '<%= appScripts %>/common/utils.js'
-                ],
-                dest: '<%= distScripts %>/common/common.js'
-            },
-
             library:{
                 src:[
                     'js/libs/jquery-1.10.2.js',
@@ -85,8 +59,15 @@ module.exports = function(grunt) {
             app:{
                 src:[
                     'js/app.js',
-                    'tests/runner.js',
                     'templates/js/**/*.js'
+                    ],
+                dest:'dist/js/app.js'
+            },
+
+            app_for_testing:{
+                src:[
+                    'dist/js/app.js',
+                    'tests/runner.js'
                     ],
                 dest:'dist/js/app.js'
             }
@@ -106,6 +87,16 @@ module.exports = function(grunt) {
                        cwd: 'css',
                        src: ['*.css'],
                        dest: 'dist/css'
+                   }
+               ]
+           },
+           tests: {
+               files: [
+                   {
+                       expand: true,
+                       cwd: 'tests',
+                       src: ['**/*.js', '**/*.css'],
+                       dest: 'dist/tests'
                    }
                ]
            }
@@ -153,6 +144,13 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
         'default',
         'karma'
+    ]);
+
+    grunt.registerTask('qtest', [
+        'default',
+        'concat:app_for_testing',
+        'copy:tests',
+        'nodestatic'
     ]);
 
     grunt.registerTask('web', [
