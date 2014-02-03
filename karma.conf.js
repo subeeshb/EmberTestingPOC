@@ -23,7 +23,8 @@ module.exports = function(config) {
         'karma-qunit',
         'karma-ember-preprocessor',
         'karma-phantomjs-launcher',
-        'karma-chrome-launcher'
+        'karma-chrome-launcher',
+        'karma-htmlfile-reporter'
     ],
 
     // list of files to exclude
@@ -34,7 +35,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'html'],
 
 
     // web server port
@@ -71,6 +72,11 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: true,
+
+    htmlReporter: {
+      outputFile: 'tests/results.html'
+    }
+
   });
 };
