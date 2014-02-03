@@ -86,3 +86,4 @@ App.Page2Controller = Ember.Controller.extend({
 
   
 });
+
