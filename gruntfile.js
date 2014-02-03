@@ -120,7 +120,17 @@ module.exports = function(grunt) {
           unit: {
             configFile: 'karma.conf.js'
           }
-        }
+        },
+
+        nodestatic: {
+            server: {
+              options: {
+                port: 9999,
+                base: 'dist',
+                keepalive: true
+              }
+            }
+          }
 
     });
 
@@ -128,10 +138,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-ember-handlebars');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    // grunt.loadNpmTasks('grunt-contrib-watch');
-    // grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
-    // grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-nodestatic');
 
 
     grunt.registerTask('default', [
@@ -140,5 +148,15 @@ module.exports = function(grunt) {
         'concat:library',
         'concat:app',
         'copy'
+    ]);
+
+    grunt.registerTask('test', [
+        'default',
+        'karma'
+    ]);
+
+    grunt.registerTask('web', [
+        'default',
+        'nodestatic'
     ]);
 };
