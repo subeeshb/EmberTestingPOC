@@ -59,6 +59,26 @@ $ grunt test
 Run the command above to build and run the tests using the Karma test runner. By default, tests will be executed in Chrome (configurable in the karma.conf.js file). A test results summary will also be generated at ./tests/results.html
 
 
+Running single test cases
+-------------------------
+
+This POC includes the qunit-karma-launcher plugin. This adds omodule(), otest(), oasyncTest() functions to run only specific modules or tests respectively. To run only one test case in a file, change the test() function to otest().
+
+For example, changing 
+
+```
+test("check routing to page 2", function() { ...
+```
+
+to 
+
+```
+otest("check routing to page 2", function() { ...
+```
+
+will run this test case only, ignoring all other test cases.
+
+
 Editing test cases
 ------------------
 
