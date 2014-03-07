@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
 
         // please refer to "path" in package.json
         // defining paths of /scripts/ in app & dist folder
@@ -16,145 +16,165 @@ module.exports = function(grunt) {
         compiledTemplates: '<%= pkg.path.app %>/<%= pkg.path.templates %>/<%= pkg.path.js %>',
 
         meta: {
-            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-                '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-                ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+          banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+          '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+          '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
+          '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+          ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
         },
         ember_handlebars: {
-            compile: {
-                options: {
-                    processName: function(filePath) {
-                        var data = filePath.substring(filePath.lastIndexOf('/') + 1,filePath.length);
-                        var arr=[];
-                        arr = data.split(".");
-                        fullName = (filePath.indexOf('/components/') > -1) ? 'components/'+arr[0] : arr[0];
-                        return fullName;
-                    }
-                },
-                files: [
-                    {
-                        expand: true,     // Enable dynamic expansion.
-                        cwd: 'templates/html/',      // Src matches are relative to this path.
-                        src: ['**/*.handlebars'], // Actual pattern(s) to match.
-                        dest: 'templates/js/',   // Destination path prefix.
-                        ext: '.js'   // Dest filepaths will have this extension.
-                    }
-                ]
+          compile: {
+            options: {
+              processName: function(filePath) {
+                var data = filePath.substring(filePath.lastIndexOf('/') + 1,filePath.length);
+                var arr=[];
+                arr = data.split(".");
+                fullName = (filePath.indexOf('/components/') > -1) ? 'components/'+arr[0] : arr[0];
+                return fullName;
+              }
+            },
+            files: [
+            {
+              expand: true,     // Enable dynamic expansion.
+              cwd: 'templates/html/',      // Src matches are relative to this path.
+              src: ['**/*.handlebars'], // Actual pattern(s) to match.
+              dest: 'templates/js/',   // Destination path prefix.
+              ext: '.js'   // Dest filepaths will have this extension.
             }
+            ]
+          }
         },
 
         concat:{
 
-            library:{
-                src:[
-                    'js/libs/jquery-1.10.2.js',
-                    'js/libs/handlebars-1.1.2.js',
-                    'js/libs/ember-1.3.1.js',
-                    ],
-                dest:'dist/js/libs.js'
-            },
+          library:{
+            src:[
+            'js/libs/jquery-1.10.2.js',
+            'js/libs/handlebars-1.1.2.js',
+            'js/libs/ember-1.3.1.js',
+            ],
+            dest:'dist/js/libs.js'
+          },
 
-            app:{
-                src:[
-                    'js/app.js',
-                    'templates/js/**/*.js'
-                    ],
-                dest:'dist/js/app.js'
-            },
+          app:{
+            src:[
+            'js/app.js',
+            'templates/js/**/*.js'
+            ],
+            dest:'dist/js/app.js'
+          },
 
-            app_for_testing:{
-                src:[
-                    'dist/js/app.js',
-                    'tests/runner.js'
-                    ],
-                dest:'dist/js/app.js'
-            }
+          app_for_testing:{
+            src:[
+            'dist/js/app.js',
+            'tests/runner.js'
+            ],
+            dest:'dist/js/app.js'
+          }
         },
 
-       copy: {
-           main: {
-               files: [
-                   {
-                       expand: true,
-                       cwd: '.',
-                       src: ['index.html', 'data.json'],
-                       dest: 'dist'
-                   },
-                   {
-                       expand: true,
-                       cwd: 'css',
-                       src: ['*.css'],
-                       dest: 'dist/css'
-                   }
-               ]
+        copy: {
+         main: {
+           files: [
+           {
+             expand: true,
+             cwd: '.',
+             src: ['index.html', 'data.json'],
+             dest: 'dist'
            },
-           tests: {
-               files: [
-                   {
-                       expand: true,
-                       cwd: 'tests',
-                       src: ['**/*.js', '**/*.css'],
-                       dest: 'dist/tests'
-                   }
-               ]
+           {
+             expand: true,
+             cwd: 'css',
+             src: ['*.css'],
+             dest: 'dist/css'
            }
+           ]
+         },
+         tests: {
+           files: [
+           {
+             expand: true,
+             cwd: 'tests',
+             src: ['**/*.js', '**/*.css'],
+             dest: 'dist/tests'
+           }
+           ]
+         }
        },
 
-        clean: {
-            dist: "dist/",
-            jsTemplate: "app/templates/html/**/*.js"
-        },
+       clean: {
+        dist: "dist/",
+        jsTemplate: "app/templates/html/**/*.js"
+      },
 
-        karma: {
-          unit: {
-            configFile: 'karma.conf.js'
-          }
-        },
+      karma: {
+        unit: {
+          configFile: 'karma.conf.js'
+        }
+      },
 
-        nodestatic: {
-            server: {
-              options: {
-                port: 9999,
-                base: 'dist',
-                keepalive: true
-              }
-            }
+      nodestatic: {
+        server: {
+          options: {
+            port: 9999,
+            base: 'dist',
+            keepalive: false
           }
+        }
+      },
+
+      watch: {
+        options: {
+          livereload: true,
+        },
+        css: {
+          files: ['js/**/*', 'tests/**/*'],
+          tasks: ['build_with_qunit'],
+        },
+      }
 
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-ember-handlebars');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-nodestatic');
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-ember-handlebars');
+grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-karma');
+grunt.loadNpmTasks('grunt-nodestatic');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-    grunt.registerTask('default', [
-        'clean',
-        'ember_handlebars',
-        'concat:library',
-        'concat:app',
-        'copy'
-    ]);
+grunt.registerTask('default', [
+  'clean',
+  'ember_handlebars',
+  'concat:library',
+  'concat:app',
+  'copy'
+  ]);
 
-    grunt.registerTask('test', [
-        'default',
-        'karma'
-    ]);
+grunt.registerTask('build_with_qunit', [
+  'default',
+  'concat:app_for_testing',
+  'copy:tests'
+  ]);
 
-    grunt.registerTask('qtest', [
-        'default',
-        'concat:app_for_testing',
-        'copy:tests',
-        'nodestatic'
-    ]);
+grunt.registerTask('test', [
+  'default',
+  'karma'
+  ]);
 
-    grunt.registerTask('web', [
-        'default',
-        'nodestatic'
-    ]);
+grunt.registerTask('qtest', [
+  'build_with_qunit',
+  'nodestatic'
+  ]);
+
+grunt.registerTask('devtest', [
+  'qtest',
+  'watch'
+  ]);
+
+grunt.registerTask('web', [
+  'default',
+  'nodestatic'
+  ]);
 };
