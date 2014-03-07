@@ -4,7 +4,7 @@ Ember Integration testing POC
 Getting started
 ---------------
 
-Ensure that Grunt and Karma have been installed globally. If not, run the following commands:
+Node.JS is required to install dependencies and run the app. Ensure that Grunt and Karma have been installed globally. If not, run the following commands:
 
 ```
 $ npm install -g grunt-cli
@@ -12,7 +12,7 @@ $ npm install -g grunt-cli
 $ npm install -g karma
 ```
 
-Then install the project dependencies by running 
+Then install the project dependencies by running this command in the project folder.
 
 ```
 $ npm install
