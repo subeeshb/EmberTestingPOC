@@ -17,7 +17,7 @@ module.exports = function(config) {
       'dist/js/libs.js',
       'tests/vendor/qunit-karma-setup.js',
       'dist/js/app.js',
-      'tests/tests.js',
+      'tests/specs/*.js',
       'tests/vendor/qunit-karma-launch.js'
     ],
 

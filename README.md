@@ -62,4 +62,4 @@ Run the command above to build and run the tests using the Karma test runner. By
 Editing test cases
 ------------------
 
-The test cases are defined in *./tests/tests.js*. All application logic, including component code, is in *./js/app.js*. To change the Karma configuration, edit *./karma.conf.js*.
+The test cases are defined in *./tests/specs/tests.js*. All application logic, including component code, is in *./js/app.js*. To change the Karma configuration, edit *./karma.conf.js*.

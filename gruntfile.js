@@ -113,21 +113,19 @@ module.exports = function(grunt) {
         }
       },
 
-      nodestatic_watch: {
-        server: {
-          options: {
-            port: 9999,
-            base: 'dist',
-            keepalive: false
-          }
-        }
-      },
       nodestatic: {
         server: {
           options: {
             port: 9999,
             base: 'dist',
             keepalive: true
+          }
+        },
+        server_watch: {
+          options: {
+            port: 9999,
+            base: 'dist',
+            keepalive: false
           }
         }
       },
@@ -179,7 +177,7 @@ grunt.registerTask('qtest', [
 
 grunt.registerTask('devtest', [
   'build_with_qunit',
-  'nodestatic_watch',
+  'nodestatic:server_watch',
   'watch'
   ]);
 
