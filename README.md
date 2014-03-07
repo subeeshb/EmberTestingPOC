@@ -1,6 +1,10 @@
 Ember Integration testing POC
 =============================
 
+Installing Node and NPM in SCB Laptop
+---------------
+
+
 Getting started
 ---------------
 
