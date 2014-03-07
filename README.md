@@ -1,36 +1,65 @@
-starter-kit
-===========
+Ember Integration testing POC
+=============================
 
-A starter kit for Ember
+Getting started
+---------------
 
-Your Ember.js project is almost ready! Here's how to get started:
+Ensure that Grunt and Karma have been installed globally. If not, run the following commands:
 
-- Start writing your app in js/app.js.
+```
+$ npm install -g grunt-cli
 
-- Describe your application HTML in index.html.
+$ npm install -g karma
+```
 
-- During development, you can link to js/libs/ember-*.js to get the
-  unminified version of Ember.js.
+Then install the project dependencies by running 
 
-- Add CSS to css/style.css
+```
+$ npm install
+```
 
-- Open index.html in your browser
 
-Tests
-=====
+Building the app
+----------------
 
-This starter kit comes with an integration test sample, written for QUnit runner. 
+Build the project and start a server by running the following command:
 
-You can run the tests by opening the `index.html?test` page in your browser.
+```
+$ grunt web
+```
 
-The test is located in the `tests/tests.js` file. You can see how such an 
-integration test should be written, using QUnit assertions and ember-testing helpers.
+This will build the app to the dist folder and start a server. Open the app in your browser by going to http://localhost:9999
 
-For more information about ember-testing package see [ember-testing](http://emberjs.com/guides/testing/integration/)
 
-For more information about the QUnit testing framework, see [QUnit](http://qunitjs.com/)
+Running tests using QUnit
+-------------------------
 
-Contact
-====
+```
+$ grunt qtest
+```
 
-www.emberjs.com
+The above command will build the app and inject a QUnit runner script and libraries. Run the tests by going to http://localhost:9999/?test
+
+You can also run grunt using the following command to watch for changes to scripts and test cases and automatically build the app when changes are made:
+
+```
+$ grunt devtest
+```
+
+In this mode, navigate to http://localhost:9999/?test to run tests. After you have made changes, refresh the page to rerun the tests against the updated code without having to run grunt again. 
+
+
+Running tests using Karma
+-------------------------
+
+```
+$ grunt test
+```
+
+Run the command above to build and run the tests using the Karma test runner. By default, tests will be executed in Chrome (configurable in the karma.conf.js file). A test results summary will also be generated at ./tests/results.html
+
+
+Editing test cases
+------------------
+
+The test cases are defined in *./tests/tests.js*. All application logic, including component code, is in *./js/app.js*. To change the Karma configuration, edit *./karma.conf.js*.
