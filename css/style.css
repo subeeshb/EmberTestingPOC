@@ -2,3 +2,8 @@
 .ember-application {
     margin: 20px;
 }
+
+.todo-list li.completed {
+	text-decoration: line-through;
+	opacity: 0.3;
+}

@@ -1,0 +1,7 @@
+<ul class="todo-list">
+{{#each todoItem in todoItems}}
+	<li {{bind-attr class="todoItem.isComplete:completed"}}>
+		<a href="#" {{action toggleCompleted todoItem}}>{{todoItem.taskName}}</a>
+	</li>
+{{/each}}
+</ul>

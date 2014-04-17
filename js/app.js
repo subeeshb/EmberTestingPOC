@@ -21,6 +21,7 @@ App = Ember.Application.create();
 App.Router.map(function() {
   // put your routes here
   this.route('page2', { path: '/page2' });
+  this.route('todo', { path: '/todo' });
 });
 
 App.IndexRoute = Ember.Route.extend({

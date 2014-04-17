@@ -49,3 +49,26 @@ function qunit__launch() {
     if (!qunit__exclusive || test.run) test.func.apply(window, test.args);
   }
 }
+
+
+//set up Ember-QUnit
+emq.globalize();
+
+//init for testing
+console.log("!!!!!!!");
+if (window.location.search.indexOf("?test") === -1) {
+  //karma
+  document.write(
+    '<div id="qunit"></div>' +
+    '<div id="qunit-fixture"></div>' +
+    '<div id="ember-testing-container" style="visibility: hidden;">' +
+    '<div id="ember-testing"></div>' +
+    '</div>'
+    );
+}
+
+App.rootElement = '#ember-testing';
+App.setupForTesting();
+App.injectTestHelpers();
+setResolver(Ember.DefaultResolver.create({ namespace: App }));
+

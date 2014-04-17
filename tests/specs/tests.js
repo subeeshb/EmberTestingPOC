@@ -1,12 +1,7 @@
-
-App.rootElement = '#ember-testing';
-App.setupForTesting();
-App.injectTestHelpers();
-
+console.log('tests');
 module("Integration tests", {
   setup: function() {
-
-    Ember.run(App, App.advanceReadiness);
+    // Ember.run(App, App.advanceReadiness);
   },
   teardown: function() {
     App.reset();

@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             src:[
             'js/libs/jquery-1.10.2.js',
             'js/libs/handlebars-1.1.2.js',
-            'js/libs/ember-1.3.1.js',
+            'js/libs/ember-1.5.0.js',
             ],
             dest:'dist/js/libs.js'
           },
@@ -59,6 +59,7 @@ module.exports = function(grunt) {
           app:{
             src:[
             'js/app.js',
+            'js/modules/**/*.js',
             'templates/js/**/*.js'
             ],
             dest:'dist/js/app.js'

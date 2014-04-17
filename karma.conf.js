@@ -15,9 +15,10 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'dist/js/libs.js',
-      'tests/vendor/qunit-karma-setup.js',
       'dist/js/app.js',
-      'tests/specs/*.js',
+      'tests/vendor/ember-qunit-main.js',
+      'tests/vendor/qunit-karma-setup.js',
+      'tests/specs/test-*.js',
       'tests/vendor/qunit-karma-launch.js'
     ],
 
