@@ -43,10 +43,10 @@ App.NewTodoComponent = Ember.Component.extend({
 
 
 App.TodoListComponent = Ember.Component.extend({
-	todoItems: null,
 	actions: {
-		removeItem: function(item) {
-			console.log(item);
+		deleteItem: function(item) {
+			console.log('deleteItem');
+			this.sendAction('onDelete', item);
 		},
 		toggleCompleted: function(item) {
 			console.log('toggleCompleted');
@@ -70,8 +70,10 @@ App.TodoController = Ember.Controller.extend({
   actions: {
   		newTodoAdded: function(todoItem) {
   			console.log('newTodoAdded action triggered');
-  			console.log(this.get('model'));
-  			this.get('model').push(todoItem);
+  			this.get('model').pushObject(todoItem);
+  		},
+  		todoItemDeleted: function(todoItem) {
+  			this.get('model').removeObject(todoItem);
   		}
   }
 });
