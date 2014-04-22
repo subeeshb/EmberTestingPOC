@@ -1,4 +1,3 @@
-console.log('test-nameInputComponent');
 moduleForComponent('name-input');
 
 test('check that greeting is correct', function() {

@@ -1,5 +1,4 @@
-console.log('test-nameInputComponent');
-moduleForComponent('my-button', 'MyButtonComponent');
+moduleForComponent('my-button');
 
 //test parameters
 var PARAMS = {

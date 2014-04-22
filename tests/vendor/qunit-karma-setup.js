@@ -55,7 +55,6 @@ function qunit__launch() {
 emq.globalize();
 
 //init for testing
-console.log("!!!!!!!");
 if (window.location.search.indexOf("?test") === -1) {
   //karma
   document.write(
