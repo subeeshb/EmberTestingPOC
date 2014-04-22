@@ -13,7 +13,7 @@ if (window.location.search.indexOf("?test") !== -1) {
     );
     //    //Add test case files in this document.write(..) function
     document.write(
-        '<script src="tests/specs/todo/test-todoRoute.js"></script>' 
+        '<script src="tests/specs/todo/test-todoController.js"></script>' 
     );
 
     document.write(
