@@ -18,7 +18,6 @@ module.exports = function(config) {
       'dist/js/app.js',
       'tests/vendor/ember-qunit-main.js',
       'tests/vendor/qunit-karma-setup.js',
-      // 'tests/specs/test-*.js',
       'tests/specs/**/test-*.js',
       'tests/vendor/qunit-karma-launch.js'
     ],

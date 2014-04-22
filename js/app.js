@@ -30,6 +30,10 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
+App.IndexController = Ember.ObjectController.extend({
+  window: window
+});
+
 App.MyButtonComponent = Ember.Component.extend({
   beforeText: null,
 	actions: {

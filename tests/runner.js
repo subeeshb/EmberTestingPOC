@@ -1,3 +1,5 @@
+window.isTestModeEnabled = true;
+
 if (window.location.search.indexOf("?test") !== -1) {
     document.write(
         '<div id="qunit"></div>' +
