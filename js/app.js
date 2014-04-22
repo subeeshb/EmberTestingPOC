@@ -21,12 +21,17 @@ App = Ember.Application.create();
 App.Router.map(function() {
   // put your routes here
   this.route('page2', { path: '/page2' });
+  this.route('todo', { path: '/todo' });
 });
 
 App.IndexRoute = Ember.Route.extend({
   model: function() {
     return ['red', 'yellow', 'blue'];
   }
+});
+
+App.IndexController = Ember.ObjectController.extend({
+  window: window
 });
 
 App.MyButtonComponent = Ember.Component.extend({

@@ -51,7 +51,7 @@ module.exports = function(grunt) {
             src:[
             'js/libs/jquery-1.10.2.js',
             'js/libs/handlebars-1.1.2.js',
-            'js/libs/ember-1.3.1.js',
+            'js/libs/ember-1.5.0.js',
             ],
             dest:'dist/js/libs.js'
           },
@@ -59,6 +59,7 @@ module.exports = function(grunt) {
           app:{
             src:[
             'js/app.js',
+            'js/modules/**/*.js',
             'templates/js/**/*.js'
             ],
             dest:'dist/js/app.js'
@@ -70,7 +71,13 @@ module.exports = function(grunt) {
             'tests/runner.js'
             ],
             dest:'dist/js/app.js'
-          }
+          },
+          test_specs: {
+            src:[
+            'tests/specs/**/test-*.js'
+            ],
+            dest:'dist/tests/specs.js'
+          }          
         },
 
         copy: {
@@ -162,7 +169,8 @@ grunt.registerTask('default', [
 grunt.registerTask('build_with_qunit', [
   'default',
   'concat:app_for_testing',
-  'copy:tests'
+  'copy:tests',
+  'concat:test_specs'
   ]);
 
 grunt.registerTask('test', [
