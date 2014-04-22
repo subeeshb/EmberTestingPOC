@@ -11,9 +11,9 @@ if (window.location.search.indexOf("?test") !== -1) {
         '<script src="tests/vendor/ember-qunit-main.js"></script>' +
         '<script src="tests/vendor/qunit-karma-setup.js"></script>'
     );
-    //    //Add test case files in this document.write(..) function
+    
     document.write(
-        '<script src="tests/specs/todo/test-todoController.js"></script>' 
+        '<script src="tests/specs.js"></script>' 
     );
 
     document.write(

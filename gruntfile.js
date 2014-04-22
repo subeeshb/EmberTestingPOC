@@ -71,7 +71,13 @@ module.exports = function(grunt) {
             'tests/runner.js'
             ],
             dest:'dist/js/app.js'
-          }
+          },
+          test_specs: {
+            src:[
+            'tests/specs/**/test-*.js'
+            ],
+            dest:'dist/tests/specs.js'
+          }          
         },
 
         copy: {
@@ -163,7 +169,8 @@ grunt.registerTask('default', [
 grunt.registerTask('build_with_qunit', [
   'default',
   'concat:app_for_testing',
-  'copy:tests'
+  'copy:tests',
+  'concat:test_specs'
   ]);
 
 grunt.registerTask('test', [
