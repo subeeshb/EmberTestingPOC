@@ -15,7 +15,9 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'dist/js/libs.js',
-      'dist/js/app.js',
+      'js/app.js',
+      'js/modules/**/*.js',
+      'templates/js/**/*.js',
       'tests/vendor/ember-qunit-main.js',
       'tests/vendor/qunit-karma-setup.js',
       'tests/specs/**/test-*.js',
@@ -27,7 +29,8 @@ module.exports = function(config) {
         'karma-ember-preprocessor',
         'karma-phantomjs-launcher',
         'karma-chrome-launcher',
-        'karma-htmlfile-reporter'
+        'karma-htmlfile-reporter',
+        'karma-coverage'
     ],
 
     // list of files to exclude
@@ -35,10 +38,15 @@ module.exports = function(config) {
       
     ],
 
+    preprocessors: {
+        'js/app.js': ['coverage'],
+        'js/modules/**/*.js': ['coverage']
+    },
+
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress', 'html'],
+    reporters: ['progress', 'html', 'coverage'],
 
 
     // web server port
@@ -66,7 +74,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // If browser does not capture in given timeout [ms], kill it
@@ -78,7 +86,14 @@ module.exports = function(config) {
     singleRun: true,
 
     htmlReporter: {
-      outputFile: 'tests/results.html'
+      outputFile: 'tests/results/results.html'
+    },
+
+    coverageReporter: {
+      reporters:[
+      {type: 'html', dir:'tests/results/'},
+      {type: 'cobertura', dir:'tests/results/', file:'coverage.xml'}
+      ]
     }
 
   });
