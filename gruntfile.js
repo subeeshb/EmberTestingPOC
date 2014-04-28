@@ -173,24 +173,26 @@ grunt.registerTask('build_with_qunit', [
   'concat:test_specs'
   ]);
 
-grunt.registerTask('test', [
-  'default',
-  'karma'
-  ]);
 
-grunt.registerTask('qtest', [
-  'build_with_qunit',
-  'nodestatic'
-  ]);
-
-grunt.registerTask('devtest', [
+//for development. Build, add test hooks, and watch for changes.
+grunt.registerTask('dev', [
   'build_with_qunit',
   'nodestatic:server_watch',
   'watch'
   ]);
 
-grunt.registerTask('web', [
+//Build without test runner hooks and start server.
+grunt.registerTask('server', [
   'default',
   'nodestatic'
   ]);
+
+
+//production build. Ideally, should also contain additional tasks to minify JS, compress images, etc
+grunt.registerTask('dist', [
+  'default',
+  'karma'
+]);
+
 };
+
