@@ -60,8 +60,10 @@ Running tests using Karma
 $ grunt test
 ```
 
-Run the command above to build and run the tests using the Karma test runner. By default, tests will be executed in Chrome (configurable in the karma.conf.js file). A test results summary will also be generated at ./tests/results.html
+Run the command above to build and run the tests using the Karma test runner. By default, tests will be executed in PhantomJS (configurable in the karma.conf.js file). Karma will generate the following output:
 
+* A test results summary at ./tests/results/results.html
+* A code coverage report at ./tests/results/[browser name]/index.html
 
 Running single test cases
 -------------------------
@@ -83,7 +85,9 @@ otest("check routing to page 2", function() { ...
 will run this test case only, ignoring all other test cases.
 
 
-Editing test cases
-------------------
+Editing app code and test cases
+-------------------------------
 
-The test cases are defined in *./tests/specs/tests.js*. All application logic, including component code, is in *./js/app.js*. To change the Karma configuration, edit *./karma.conf.js*.
+The test cases are defined in various files under the *./tests/specs* folder. All core application logic is in *./js/app.js*. The sample todo list app is implemented in *./js/modules/todo/todoList.js*. 
+
+To change the Karma configuration, edit *./karma.conf.js*.
