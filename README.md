@@ -1,4 +1,4 @@
-Ember Integration testing POC
+Ember testing POC
 =============================
 
 Getting started
